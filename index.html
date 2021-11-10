@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>本地nodejs服务 读写文件</p>
+    <label for="">请输入写入的数据：</label> <input type="text" id="content">
+    <button id="submit">提交</button>
+    <script type="text/javascript">
+        let input = document.getElementById("content");
+        let btn = document.getElementById("submit");
+        btn.onclick = function () {
+            fetch("http://localhost:3000/update", { method: "post", body: input.value })
+                .then(res => res.json())
+                .then(res => {
+                    console.log(res);
+                    if (res.status) {
+                        alert('修改文件成功！');
+                    }
+                })
+                .catch(err => {
+                    alert('本地服务器没有启动！');
+                })
+                ;
+        }
+    </script>
+</body>
+
+</html>
